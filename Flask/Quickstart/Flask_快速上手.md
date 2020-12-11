@@ -101,7 +101,44 @@ u'Marked up \xbb HTML'
 
 ## 6 操作请求数据
 
-[link](https://dormousehole.readthedocs.io/en/latest/quickstart.html#id14)
+[Request 文档](https://dormousehole.readthedocs.io/en/latest/api.html#flask.Request)
+
+在 Flask 中由全局 对象 [`request`](https://dormousehole.readthedocs.io/en/latest/api.html#flask.request) 来提供请求信息。如何保持线程安全？本地环境
+
+### 本地环境
+
+某些对象在 Flask 中是全局对象，但不是通常意义下的全局对象。这些对象实际上是 特定环境下本地对象的代理。
+
+一个请求进来了，服务器决定生成一个**新线程**。当 Flask 开始其内部请求处理时会把当前线程作为**活动环境**，并把当前应用和 WSGI 环境绑定到 这个环境（线程）。它以一种聪明的方式使得一个应用可以**在不中断的情况下调用另一个应用**。
+
+在测试 时会遇到由于<u>没有请求对象而导致依赖于请求的代码会突然崩溃</u>的情况。对策是自己**创建 一个请求对象**并绑定到环境。
+
+1.  最简单的单元测试解决方案是使用 [`test_request_context()`](https://dormousehole.readthedocs.io/en/latest/api.html#flask.Flask.test_request_context) 环境管理器。通过使用 `with` 语句 可以绑定一个测试请求，以便于交互。
+2.  另一种方式是把整个 WSGI 环境传递给 [`request_context()`](https://dormousehole.readthedocs.io/en/latest/api.html#flask.Flask.request_context) 方法。 见 test_request.py
+
+### 请求对象
+
+通过 `request.form` 属性处理表单数据，`request.form['username']`
+
+当 `form` 属性中不存在这个键时会引发一个 [`KeyError`](https://docs.python.org/3/library/exceptions.html#KeyError) 。 如果你不像捕捉一个标准错误一样捕捉 [`KeyError`](https://docs.python.org/3/library/exceptions.html#KeyError) ，那么会显示一个 HTTP 400 Bad Request 错误页面。
+
+
+
+要操作 URL （如 `?key=value` ）中提交的参数可以使用 [`args`](https://dormousehole.readthedocs.io/en/latest/api.html#flask.Request.args) 属性:
+
+```python
+searchword = request.args.get('key', '')
+```
+
+用户可能会改变 URL 导致出现一个 400 请求出错页面，这样降低了用户友好度。因此， 我们推荐使用 get 或通过捕捉 [`KeyError`](https://docs.python.org/3/library/exceptions.html#KeyError) 来访问 URL 参数。
+
+### 文件上传
+
+https://dormousehole.readthedocs.io/en/latest/quickstart.html#id17
+
+### Cookies
+
+
 
 ## 7 重定向和错误
 
