@@ -24,3 +24,12 @@ BaiduSpider
 
 ## NLP 自然语言处理工具
 
+Spacy
+
+## DataScience 数据科学相关
+
+Numpy
+
+Pandas
+
+Matplotlib
