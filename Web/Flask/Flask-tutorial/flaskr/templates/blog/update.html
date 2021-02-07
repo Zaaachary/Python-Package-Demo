@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Edit "{{ post['title'] }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <!-- 表单1 提交编辑过的数据-->
+  <form method="post">
+    <label for="title">Title</label>
+    <input name="title" id="title"
+      value="{{ request.form['title'] or post['title'] }}" required>
+    <label for="body">Body</label>
+    <!-- request 可以模板中使用 -->
+    <!-- 未提交时显示post中的内容，提交了不合法的数据则显示request.form -->
+    <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
+    <input type="submit" value="Save">
+  </form>
+  <hr>
+  <!-- 表单2 只包含一个按钮-->
+  <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+  </form>
+{% endblock %}

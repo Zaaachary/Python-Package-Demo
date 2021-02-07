@@ -49,9 +49,11 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
     
-    from . import db, auth
+    from . import db, auth, blog
     db.init_app(app)
     app.register_blueprint(auth.bp)
+    app.register_blueprint(blog.bp)     # 没有 url_prefix
+    app.add_url_rule('/', endpoint='index') # url_for('index) == url_for('blog.index')
 
 
     return app

@@ -5,10 +5,9 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from flasker.db import get_db
+from flaskr.db import get_db
 
-bp = Blueprint('auth', __name__, url_prefix='/auth')        # 参数2告诉蓝图对象在何处定义
-
+bp = Blueprint('auth', __name__, url_prefix='/auth')        # 参数3告诉蓝图对象在何处定义
 
 
 @bp.route('/register', methods=['GET', 'POST']) # 关联 url "/auth/register"
@@ -91,6 +90,7 @@ def login_required(view):
     '''定义一个装饰器，可在其他视图中验证'''
     @functools.wraps(view)
     def wrapped_view(**kwargs):
+        # 未登录则返回登录视图
         if g.user is None:
             return redirect(url_for('auth.login'))
 
