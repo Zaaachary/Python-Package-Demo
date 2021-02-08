@@ -2,34 +2,48 @@
 
 
 
-## Database 相关
+## Data
 
-py2neo：使用 python 对 neo4j 数据库进行增删改查操作。
+数据库接口、数据处理包
 
-elasticsearch
+1.  Database
+    -   py2neo：neo4j
+    -   elasticsearch
+2.  Data Processing
+    -   Numpy
+    -   Pandas
+    -   Matplotlib
 
-## Web 开发
 
-Flask：一个轻量级的 web 框架
 
-Django
+## Network
 
-## Spiders 各种爬虫
+1.  Web dev
+    -   Flask
+    -   Django
 
-requests
+2.  Spiders 各种爬虫
+    -   requests
+    -   scrapy
+    -   BaiduSpider
 
-scrapy
+3.  Others
+    -   SMTP
+    -   TCP & IP： socket，UDP，
 
-BaiduSpider
 
-## NLP 自然语言处理工具
 
-Spacy
+## Natural Language Processing
 
-## DataScience 数据科学相关
+-   Spacy
 
-Numpy
+-   HanLP
 
-Pandas
 
-Matplotlib
+
+## Universal Application
+
+1.  GUI, e.g. Tkinter
+2.  Multithreading, e.g. Thread
+3.  Image, e.g. OpenCV
+4.  Office, xlrd
