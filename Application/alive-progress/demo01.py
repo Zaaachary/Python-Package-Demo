@@ -1,3 +1,13 @@
+#! -*- encoding:utf-8 -*-
+"""
+@File    :   demo01.py
+@Author  :   Zachary Li
+@Contact :   li_zaaachary@163.com
+@Dscpt   :   $ pip install alive-progress
+
+"""
+
+
 from alive_progress import alive_bar, config_handler
 import time
 

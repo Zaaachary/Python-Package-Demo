@@ -9,5 +9,6 @@ total = 300
 with alive_bar(total) as bar:  # declare your expected total
     for _ in range(total):         # iterate as usual over your items
         time.sleep(2)
+        bar.text('test')
         bar()                  # call after consuming one item    
 
